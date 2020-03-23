@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue虚拟dom</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+	<div id="app">
+		# vue虚拟dom
+		# render函数编写虚拟dom
+		<h4>具体参考官档 <a href="https://cn.vuejs.org/v2/guide/render-function.html">链接</a></h4>
+		
+		用render函数编写以下dom
+		
+		<h1>
+		  <a name="hello-world" href="#hello-world">
+		    Hello world!
+		  </a>
+		</h1>
+		
+		组件效果
+		<anchored-heading :level="1">Hello world!</anchored-heading>
+	</div>
+
+	<script type="text/javascript" >
+		var getChildrenTextContent = function(children) {
+			console.log(children)
+			return children.map(node=>{
+				return node.children
+				?getChildrenTextContent(node.children)
+				:node.text
+			}).join('')
+		}
+
+		 Vue.component('anchored-heading', {
+		  
+		  render: function (createElement) {
+		  	//创建kebab-case分格的id
+		  	var headingId = getChildrenTextContent(this.$slots.default).toLowerCase()
+		  		.replace(/\W+/g, '-')
+		  		.replace(/(^-|-$)/g, '')
+
+		    return createElement(
+		      'h' + this.level,   // 标签名称
+		      [
+		      	createElement('a', {
+		      		attrs:{
+		      			name: headingId,
+		      			href: '#'+headingId
+		      		}
+		      	}, this.$slots.default)
+		      ]
+		    )
+		  },
+		  props: {
+		    level: {
+		      type: Number,
+		      required: true
+		    }
+		  }
+		})
+		new Vue({
+			el:'#app',
+			
+		})
+
+	</script>
+</body>
+</html>

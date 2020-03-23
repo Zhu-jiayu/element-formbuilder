@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vnode_render函数</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+<body>
+	<div id="app">
+		<anchored-heading :level="4"><span slot="text">render函数组件</span></anchored-heading>
+	</div>
+<!-- /*原组件写法显得冗长复杂 */ -->
+<script type="text/x-template" id="anchored-heading-template">
+	
+
+  <h1 v-if="level === 1">
+    <slot name="text"></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot name="text"></slot>
+  </h2>
+  <h3 v-else-if="level === 3">
+    <slot name="text"></slot>
+  </h3>
+  <h4 v-else-if="level === 4">
+    <slot name="text"></slot>
+  </h4>
+  <h5 v-else-if="level === 5">
+    <slot name="text"></slot>
+  </h5>
+  <h6 v-else-if="level === 6">
+    <slot name="text"></slot>
+  </h6>
+</script>
+	<script type="text/javascript" >
+		
+		 Vue.component('anchored-heading', {
+		 	//render函数编写复杂组件
+		  render: function (createElement) {
+		    return createElement(
+		      'h' + this.level,   // 标签名称
+		      this.$slots.text // 子元素数组
+		    )
+		  },
+		  props: {
+		    level: {
+		      type: Number,
+		      required: true
+		    }
+		  }
+
+		  //原组件写法
+		  // template: '#anchored-heading-template',
+		  // props: {
+		  //   level: {
+		  //     type: Number,
+		  //     required: true
+		  //   }
+		  // }
+		})
+		new Vue({
+			el:'#app',
+			
+		})
+
+	</script>
+</body>
+</html>
