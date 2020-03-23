@@ -97,7 +97,7 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^\w+$/,
-          inputErrorMessage: '必填项'
+          inputErrorMessage: 'id必填项'
         }).then(({ value }) => {
           
           if(this.formid.indexOf(value)<0){
