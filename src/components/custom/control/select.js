@@ -32,14 +32,15 @@ export default (_self, h) => {
 };
 
 export let selectConf = {
-  // 对应数据库内类型
-  type: "select",
-  // 是否可配置
-  config: true,
-  // 控件左侧label内容
+
+  type: String,
+ 
+
   label: "选择框",
-  value:"3",
-  // 选项内数据
+  value:"",
+  
+
+
   options: [
     {
       value: "1",
@@ -54,6 +55,8 @@ export let selectConf = {
       label: "蚵仔煎"
     }
   ],
-  // 表单name
+   rules:[
+    {  required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+   ],
   name: "A"
 };

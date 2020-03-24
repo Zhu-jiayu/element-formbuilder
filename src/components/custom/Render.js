@@ -13,21 +13,26 @@ const form_item = {
 export default {
   name: 'renders',
   render(h) {
-    
+   
     return h('el-form-item', {
       props: {
-        label: this.obj.label + "："
-      }
+        label: this.obj.label + "：",
+        prop: this.obj.name,
+        rules:this.obj.rules,
+        labelWidth:"120px"
+      },
     }, (()=>{
       var children = form_item[this.ele](this, h)
-      if(this.$slots.close){
+      
+      if(this.$slots.setting){
        
-        children.push(this.$slots.close)
+        children.push(this.$slots.setting)
       }
     
       return children
     })() );
   },
+  
   props: {
     ele: {
       type: String,
