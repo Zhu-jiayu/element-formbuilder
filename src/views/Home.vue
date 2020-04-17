@@ -113,7 +113,7 @@ export default {
       }
       this.$refs[name].validate(valid => {
         if (valid) {
-          console.log(this.formData); //表单中的内容
+          console.log(this.formData,this.list2); //表单中的内容
         } else {
           console.log("验证不通过");
         }
